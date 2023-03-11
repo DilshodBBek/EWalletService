@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33424.131
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EWalletService", "EWalletService\EWalletService.csproj", "{85F307FF-9639-4015-8B9D-1FB76782F6C1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DC206091-ECDF-4371-A77E-A8E9E801C2B5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{54997B74-0400-4988-9608-A8B18716F67E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EWalletService.Domain", "EWalletService.Domain\EWalletService.Domain.csproj", "{BE1BCB33-A53D-47CB-97F2-B58EA03A4F69}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EWalletService.Application", "EWalletService.Application\EWalletService.Application.csproj", "{0440A47E-4F78-46D5-A712-9F98B186ACEA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EWalletService.Infrastructure", "EWalletService.Infrastructure\EWalletService.Infrastructure.csproj", "{DDA18158-7B26-4BDD-8708-6F26F6526D77}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{85F307FF-9639-4015-8B9D-1FB76782F6C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85F307FF-9639-4015-8B9D-1FB76782F6C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85F307FF-9639-4015-8B9D-1FB76782F6C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85F307FF-9639-4015-8B9D-1FB76782F6C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE1BCB33-A53D-47CB-97F2-B58EA03A4F69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE1BCB33-A53D-47CB-97F2-B58EA03A4F69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE1BCB33-A53D-47CB-97F2-B58EA03A4F69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE1BCB33-A53D-47CB-97F2-B58EA03A4F69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0440A47E-4F78-46D5-A712-9F98B186ACEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0440A47E-4F78-46D5-A712-9F98B186ACEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0440A47E-4F78-46D5-A712-9F98B186ACEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0440A47E-4F78-46D5-A712-9F98B186ACEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDA18158-7B26-4BDD-8708-6F26F6526D77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDA18158-7B26-4BDD-8708-6F26F6526D77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDA18158-7B26-4BDD-8708-6F26F6526D77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDA18158-7B26-4BDD-8708-6F26F6526D77}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{85F307FF-9639-4015-8B9D-1FB76782F6C1} = {DC206091-ECDF-4371-A77E-A8E9E801C2B5}
+		{BE1BCB33-A53D-47CB-97F2-B58EA03A4F69} = {DC206091-ECDF-4371-A77E-A8E9E801C2B5}
+		{0440A47E-4F78-46D5-A712-9F98B186ACEA} = {DC206091-ECDF-4371-A77E-A8E9E801C2B5}
+		{DDA18158-7B26-4BDD-8708-6F26F6526D77} = {DC206091-ECDF-4371-A77E-A8E9E801C2B5}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {38B576E3-C8AE-4A71-8270-9E14282659EB}
+	EndGlobalSection
+EndGlobal
