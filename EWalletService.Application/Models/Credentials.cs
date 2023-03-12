@@ -20,10 +20,5 @@ namespace EWalletService.Application.Models
         /// </summary>
         [Required]
         public string Password { get; set; } = string.Empty;
-
-        /// <summary>
-        /// Set whether user is identified or unidentified
-        /// </summary>
-        public bool IsIdentified { get; set; }
     }
 }

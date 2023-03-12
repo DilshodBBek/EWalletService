@@ -1,5 +1,4 @@
 ﻿using EWalletService.Application.Abstractions;
-using EWalletService.Domain.Models;
 using EWalletService.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -14,9 +13,9 @@ namespace EWalletService.Infrastructure
         {
             services.AddDbContext<IApplicationDbContext, ApplicationDbContext>(options =>
             {
-                options.UseNpgsql(config.GetConnectionString("DefaultConnection"));
+                options.UseNpgsql(config.GetConnectionString("DBConnection"));
             });
-            services.AddIdentity<UserAccount, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
             return services;
         }
     }
