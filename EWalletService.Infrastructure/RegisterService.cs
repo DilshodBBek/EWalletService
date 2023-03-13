@@ -1,5 +1,6 @@
 ﻿using EWalletService.Application.Abstractions;
 using EWalletService.Infrastructure.Persistence;
+using EWalletService.Infrastructure.Swagger;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -16,6 +17,10 @@ namespace EWalletService.Infrastructure
                 options.UseNpgsql(config.GetConnectionString("DBConnection"));
             });
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddSwaggerGen(options =>
+            {
+                options.OperationFilter<ApiHeaderConfiguration>();
+            });
             return services;
         }
     }

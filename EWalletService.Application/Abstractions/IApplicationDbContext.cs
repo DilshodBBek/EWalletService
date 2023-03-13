@@ -7,6 +7,8 @@ namespace EWalletService.Application.Abstractions
     {
        // DbSet<UserAccount> Users { get; }
         DbSet<EWallet> Wallets { get; }
+        DbSet<TransactionHistory> TransactionsHistory { get; }
+
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 
     }

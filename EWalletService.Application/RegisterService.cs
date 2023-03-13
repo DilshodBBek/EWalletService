@@ -1,7 +1,4 @@
-﻿using EWalletService.Application.Abstractions;
-using MediatR;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
 namespace EWalletService.Application
@@ -14,6 +11,7 @@ namespace EWalletService.Application
             {
                 config.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly());
             });
+            services.AddHttpContextAccessor();
             return services;
         }
     }

@@ -7,8 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="UseCases\EWalletCQRS\Commands\**" />
+    <Compile Remove="UseCases\EWalletCQRS\Queries\**" />
     <Compile Remove="UseCases\UserAccount\Queries\**" />
+    <EmbeddedResource Remove="UseCases\EWalletCQRS\Commands\**" />
+    <EmbeddedResource Remove="UseCases\EWalletCQRS\Queries\**" />
     <EmbeddedResource Remove="UseCases\UserAccount\Queries\**" />
+    <None Remove="UseCases\EWalletCQRS\Commands\**" />
+    <None Remove="UseCases\EWalletCQRS\Queries\**" />
     <None Remove="UseCases\UserAccount\Queries\**" />
   </ItemGroup>
 
@@ -17,11 +23,6 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="UseCases\EWallet\Commands\" />
-    <Folder Include="UseCases\EWallet\Queries\" />
   </ItemGroup>
 
   <ItemGroup>

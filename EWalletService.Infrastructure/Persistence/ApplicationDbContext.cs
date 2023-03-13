@@ -15,5 +15,7 @@ namespace EWalletService.Infrastructure.Persistence
 
         }
         public DbSet<EWallet> Wallets { get; set; }
+
+        public DbSet<TransactionHistory> TransactionsHistory { get; set; }
     }
 }

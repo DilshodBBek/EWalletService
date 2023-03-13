@@ -32,7 +32,7 @@ namespace EWalletService.Application.UseCases.UserAccount
 
                 if (!result.Succeeded)
                     return new BadRequestObjectResult(result.Errors);
-                await _signInManager?.SignInAsync(user, false);
+                await _signInManager.SignInAsync(user, false);
                 return new OkResult();
             }
             catch (Exception e)
