@@ -7,15 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EWalletService", "EWalletSe
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DC206091-ECDF-4371-A77E-A8E9E801C2B5}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{54997B74-0400-4988-9608-A8B18716F67E}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EWalletService.Domain", "EWalletService.Domain\EWalletService.Domain.csproj", "{BE1BCB33-A53D-47CB-97F2-B58EA03A4F69}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EWalletService.Application", "EWalletService.Application\EWalletService.Application.csproj", "{0440A47E-4F78-46D5-A712-9F98B186ACEA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EWalletService.Infrastructure", "EWalletService.Infrastructure\EWalletService.Infrastructure.csproj", "{DDA18158-7B26-4BDD-8708-6F26F6526D77}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{B93CBCE8-21E6-4C94-A307-126FEBEAF80E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{B93CBCE8-21E6-4C94-A307-126FEBEAF80E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EWallet.Test", "EWallet.Test\EWallet.Test.csproj", "{C831B9FD-7808-4562-9F7F-F2BC6B07FB38}"
 EndProject
