@@ -2,7 +2,11 @@
 using EWalletService.Controllers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Moq;
+using NUnit.Framework.Interfaces;
 
 namespace EWallet.Test
 {
@@ -11,13 +15,24 @@ namespace EWallet.Test
     {
         private Mock<IMediator> _mediatorMock;
         private EWalletController _controller;
-
+        private ServiceProvider _serviceProvider;
 
         [SetUp]
         public void Setup()
         {
+            var configuration = new ConfigurationBuilder()
+           .AddJsonFile("appsettings.json")
+           .Build();
+            var services = new ServiceCollection();
+
+            // Use TestStartup class to configure services
+            var startup = new TestStartup(configuration);
+            startup.ConfigureServices(services);
+
+            _serviceProvider = services.BuildServiceProvider();
+            var cache = _serviceProvider.GetService<IMemoryCache>();
             _mediatorMock = new Mock<IMediator>();
-            _controller = new EWalletController(_mediatorMock.Object);
+            _controller = new EWalletController(_mediatorMock.Object, cache);
         }
 
         [Test]

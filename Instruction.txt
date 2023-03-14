@@ -1,0 +1,14 @@
+
+Follow these steps in sequence
+1.Check the ConnectionStrings in the appsetting.json file is correct
+2.Follow the Migration to database process(Select "EWalletService.Infrastructure" project during migration)
+3.Run Project
+4.Fill X-UserId header with exist user id from "AspNetUsers" table in database table
+5.Use https://emn178.github.io/online-tools/sha1.html website for fill X-Digest header with body encrypt string
+
+//Comments
+Even though it is not required, I want add Authentification and Authorization feature 
+to be user friendly application. I used Clean architecture and Mediatr pattern to avoid 
+tight coupling and create testable, maintanable project.
+I commented some of my codes for easy understand other developers.
+

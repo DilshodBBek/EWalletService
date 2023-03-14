@@ -22,9 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EWalletService.Application\EWalletService.Application.csproj" />
-    <ProjectReference Include="..\EWalletService.Domain\EWalletService.Domain.csproj" />
-    <ProjectReference Include="..\EWalletService.Infrastructure\EWalletService.Infrastructure.csproj" />
     <ProjectReference Include="..\EWalletService\EWalletService.csproj" />
   </ItemGroup>
 

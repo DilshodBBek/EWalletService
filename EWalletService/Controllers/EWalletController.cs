@@ -2,6 +2,7 @@
 using EWalletService.Application.UseCases.EWalletCQRS;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace EWalletService.Controllers
 {
@@ -14,10 +15,11 @@ namespace EWalletService.Controllers
     public class EWalletController : Controller
     {
         private readonly IMediator _mediatr;
-
-        public EWalletController(IMediator mediatr)
+        private readonly IMemoryCache _cache;
+        public EWalletController(IMediator mediatr, IMemoryCache cache)
         {
             _mediatr = mediatr;
+            _cache = cache;
         }
 
         [HttpPost]
@@ -34,12 +36,19 @@ namespace EWalletService.Controllers
         //}
         
         [HttpPost]
+        [ResponseCache(Duration = 60)]
         public async Task<IActionResult> Balance([FromBody] BalanceCommand walletID)
         {
-            return await _mediatr.Send(walletID);
-        }
+            string cacheKey = $"Balance_{walletID.WalletId}";
+            if (_cache.TryGetValue(cacheKey, out IActionResult response))
+            {
+                return response;
+            }
+            response = await _mediatr.Send(walletID);
+            _cache.Set(cacheKey, response, TimeSpan.FromSeconds(30));
 
-        
+            return response;
+        }
 
         [HttpPost]
         public async Task<IActionResult> Replenish([FromBody] ReplenishCommand model)
@@ -48,14 +57,20 @@ namespace EWalletService.Controllers
         }
 
         [HttpPost]
+        [ResponseCache(Duration = 60)]
         public async Task<IActionResult> Statistics([FromBody] StatisticsCommand statisticsModel)
         {
-            return await _mediatr.Send(statisticsModel);
+            string cacheKey = $"Statistics_{statisticsModel.StartDate}_{statisticsModel.EndDate}";
+            if (_cache.TryGetValue(cacheKey, out IActionResult response))
+            {
+                return response;
+            }
+
+            // If not, send the command to the mediator and cache the result
+            response = await _mediatr.Send(statisticsModel);
+            _cache.Set(cacheKey, response, TimeSpan.FromSeconds(30));
+
+            return response;
         }
-        
-
-      
-
-        
     }
 }
