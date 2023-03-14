@@ -4,37 +4,32 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 
 namespace EWalletService.Application.UseCases.EWalletCQRS
 {
     public class CreateWalletCommand : IRequest<IActionResult>
     {
-        [JsonProperty("amountOfMoney")]
-        [Range(0, 101)]
-        public int AmountOfMoney
+        public bool IsIdentified { get; set; }
+        internal int AmountOfMoney;
+        [Range(0, 100)]
+        public int Amount
         {
             get { return AmountOfMoney; }
             set
             {
-                if (IsIdentified && value > 100)
+                if (!IsIdentified)
                 {
-                    throw new ArgumentException("Money in e-wallet cannot be greater than 100 if user is identified.");
+                    if (value > 50)
+                    {
+                        throw new ArgumentException("Money in e-wallet cannot be greater than 50 if user is identified.");
+                    }
                 }
-                else if (!IsIdentified && value > 50)
-                {
-                    throw new ArgumentException("Money in e-wallet cannot be greater than 50 if user is not identified.");
-                }
-                else
-                {
-                    AmountOfMoney = value;
-                }
+                AmountOfMoney = value;
+
             }
         }
 
-        [JsonProperty("is_identified")]
-        public bool IsIdentified { get; set; } = false;
     }
     public class CreateWalletCommandHandler : IRequestHandler<CreateWalletCommand, IActionResult>
     {
@@ -54,19 +49,21 @@ namespace EWalletService.Application.UseCases.EWalletCQRS
             {
                 string userId = _httpContextAccessor.HttpContext.Request.Headers["X-UserId"].ToString();
                 IdentityUser? user = _userManager.FindByIdAsync(userId).Result;
-                if (user != null)
+                if (user is null)
                 {
-                    EWallet ewallet = new()
-                    {
-                        AmountOfMoney = request.AmountOfMoney,
-                        IsIdentified = request.IsIdentified,
-                        User = user
-                    };
-
-                    await _applicationDbContext.Wallets.AddAsync(ewallet);
-                    await _applicationDbContext.SaveChangesAsync();
+                    return new NotFoundObjectResult($"User with Id=\"{userId}\" not found");
                 }
+                EWallet ewallet = new()
+                {
+                    IsIdentified = request.IsIdentified,
+                    AmountOfMoney = request.AmountOfMoney,
+                    User = user
+                };
+
+                await _applicationDbContext.Wallets.AddAsync(ewallet);
+                await _applicationDbContext.SaveChangesAsync();
                 return new OkResult();
+
             }
             catch (Exception e)
             {

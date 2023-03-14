@@ -37,11 +37,11 @@ namespace EWalletService.Application.UseCases.EWalletCQRS
             {
                 string? userId = _httpContextAccessor.HttpContext.Request.Headers["X-UserId"];
 
-                EWallet? senderEWallet = await _applicationDbContext.Wallets
+                EWallet? senderEWallet = await _applicationDbContext.Wallets.Include(x=>x.User)
                                                        .FirstOrDefaultAsync(w => w.Id.Equals(request.SenderWalletId));
                 if (senderEWallet is null)
                 {
-                    return new NotFoundObjectResult($"Sender EWallet with id={request.SenderWalletId} is not found");
+                    return new NotFoundObjectResult($"Sender EWallet for UserId={userId} is not found");
                 }
                 else if (!senderEWallet.User.Id.Equals(userId))
                 {
@@ -59,7 +59,15 @@ namespace EWalletService.Application.UseCases.EWalletCQRS
                 }
                 senderEWallet.AmountOfMoney -= request.PaymentAmount;
                 receiverEWallet.AmountOfMoney += request.PaymentAmount;
-
+                TransactionHistory transactionHistory = new()
+                {
+                    ReceiverWalletId = receiverEWallet,
+                    SenderWalletId = senderEWallet,
+                    TransactionAmount = request.PaymentAmount,
+                    TransactionDate = DateTime.UtcNow,
+                };
+                _applicationDbContext.TransactionsHistory.Add(transactionHistory);
+                await _applicationDbContext.SaveChangesAsync();
                 return new OkResult();
             }
             catch (Exception e)

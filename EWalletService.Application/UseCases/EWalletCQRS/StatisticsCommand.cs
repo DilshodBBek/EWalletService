@@ -4,6 +4,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
 namespace EWalletService.Application.UseCases.EWalletCQRS
@@ -34,18 +35,18 @@ namespace EWalletService.Application.UseCases.EWalletCQRS
             try
             {
                 string? userId = _httpContextAccessor.HttpContext.Request.Headers["X-UserId"];
-                if (string.IsNullOrWhiteSpace(userId))
-                {
-                    return new NotFoundObjectResult($"User with X-UserId={userId} is not found");
-                }
-                IdentityUser? user = await _userManager.FindByIdAsync(userId);
-                if (user != null)
-                {
-                    List<EWallet> result = _applicationDbContext.Wallets.Where(w => w.User.Id.Equals(user.Id)).ToList();
 
-                    return new OkObjectResult(result);
+                IdentityUser? user = await _userManager.FindByIdAsync(userId);
+                if (user is null)
+                {
+                    return new NotFoundObjectResult($"User with id={userId} not found");
                 }
-                return new NotFoundObjectResult($"User with id={userId} not found");
+                List<TransactionHistory> result = _applicationDbContext.TransactionsHistory.Include(x=>x.SenderWalletId).Include(x=>x.ReceiverWalletId).
+                    Where(t => t.TransactionDate >= request.StartDate &&
+                    t.TransactionDate <= request.EndDate &&
+                    t.SenderWalletId.User.Id.Equals(user.Id)).ToList();
+
+                return new OkObjectResult(result);
             }
             catch (Exception e)
             {

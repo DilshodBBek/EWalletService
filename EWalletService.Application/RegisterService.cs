@@ -14,5 +14,7 @@ namespace EWalletService.Application
             services.AddHttpContextAccessor();
             return services;
         }
+
+       
     }
 }

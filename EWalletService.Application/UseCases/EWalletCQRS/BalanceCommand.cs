@@ -6,39 +6,37 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace EWalletService.Application.UseCases.EWalletCQRS
 {
-    public class GetEWalletCommand : IRequest<ContentResult>
+    public class BalanceCommand : IRequest<IActionResult>
     {
         [JsonProperty("walletId")]
         [JsonRequired]
         public required int WalletId { get; set; }
     }
-    public class GetEWalletCommandHandler : IRequestHandler<GetEWalletCommand, IActionResult>
+    public class BalanceCommandHandler : IRequestHandler<BalanceCommand, IActionResult>
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IApplicationDbContext _applicationDbContext;
-        public GetEWalletCommandHandler(IHttpContextAccessor httpContextAccessor, IApplicationDbContext applicationDbContext, UserManager<IdentityUser> userManager)
+        public BalanceCommandHandler(IHttpContextAccessor httpContextAccessor, IApplicationDbContext applicationDbContext, UserManager<IdentityUser> userManager)
         {
             _httpContextAccessor = httpContextAccessor;
             _applicationDbContext = applicationDbContext;
         }
-        public async Task<IActionResult> Handle(GetEWalletCommand request, CancellationToken cancellationToken)
+        public async Task<IActionResult> Handle(BalanceCommand request, CancellationToken cancellationToken)
         {
             try
             {
                 string? userId = _httpContextAccessor.HttpContext.Request.Headers["X-UserId"];
 
                 EWallet? eWallet = await _applicationDbContext.Wallets
-                                                       .FirstOrDefaultAsync(w => w.Id.Equals(request.WalletId));
+                                         .FirstOrDefaultAsync(w => w.Id.Equals(request.WalletId) &&
+                                                                            w.User.Id.Equals(userId));
                 if (eWallet == null)
                 {
                     return new NotFoundObjectResult($"EWallet with id={request.WalletId} is not found");
-                }
-                if (!eWallet.User.Id.Equals(userId))
-                {
-                    return new BadRequestObjectResult("User and EWallet not compatible");
                 }
                 return new OkObjectResult(eWallet);
             }

@@ -1,4 +1,5 @@
-﻿using EWalletService.Application.UseCases.UserAccount;
+﻿using EWalletService.Application.CustomAttributes;
+using EWalletService.Application.UseCases.UserAccount;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
