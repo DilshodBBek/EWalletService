@@ -36,8 +36,6 @@ app.Use(async (context, next) =>
     await next();
 });
 app.UseAuthorization();
-//app.UseXDigestValidation();
-//app.UseXUserIdValidation();
 
 app.MapControllers();
 

@@ -7,12 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Logs\**" />
+    <Compile Remove="Midllewares\**" />
     <Compile Remove="UseCases\EWalletCQRS\Commands\**" />
     <Compile Remove="UseCases\EWalletCQRS\Queries\**" />
     <Compile Remove="UseCases\UserAccount\Queries\**" />
+    <EmbeddedResource Remove="Logs\**" />
+    <EmbeddedResource Remove="Midllewares\**" />
     <EmbeddedResource Remove="UseCases\EWalletCQRS\Commands\**" />
     <EmbeddedResource Remove="UseCases\EWalletCQRS\Queries\**" />
     <EmbeddedResource Remove="UseCases\UserAccount\Queries\**" />
+    <None Remove="Logs\**" />
+    <None Remove="Midllewares\**" />
     <None Remove="UseCases\EWalletCQRS\Commands\**" />
     <None Remove="UseCases\EWalletCQRS\Queries\**" />
     <None Remove="UseCases\UserAccount\Queries\**" />
@@ -28,11 +34,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EWalletService.Domain\EWalletService.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Logs\" />
-    <Folder Include="Midllewares\" />
   </ItemGroup>
 
 </Project>
