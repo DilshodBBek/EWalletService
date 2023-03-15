@@ -41,10 +41,10 @@ namespace EWalletService.Application.UseCases.EWalletCQRS
                 {
                     return new NotFoundObjectResult($"User with id={userId} not found");
                 }
-                List<TransactionHistory> result = _applicationDbContext.TransactionsHistory.Include(x=>x.SenderWalletId).Include(x=>x.ReceiverWalletId).
+                List<TransactionHistory> result = _applicationDbContext.TransactionsHistory.Include(x=>x.SenderWallet).Include(x=>x.ReceiverWallet).
                     Where(t => t.TransactionDate >= request.StartDate &&
                     t.TransactionDate <= request.EndDate &&
-                    t.SenderWalletId.User.Id.Equals(user.Id)).ToList();
+                    t.SenderWallet.User.Id.Equals(user.Id)).ToList();
 
                 return new OkObjectResult(result);
             }

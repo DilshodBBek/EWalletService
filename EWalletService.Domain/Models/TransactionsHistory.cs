@@ -17,14 +17,14 @@ namespace EWalletService.Domain.Models
         /// </summary>
         [Column("sender_wallet_id")]
         [Required]
-        public required EWallet SenderWalletId { get; set; }
+        public required EWallet SenderWallet { get; set; }
 
         /// <summary>
         /// Receiver Wallet Id
         /// </summary>
         [Column("receiver_wallet_id")]
         [Required]
-        public required EWallet ReceiverWalletId { get; set; }
+        public required EWallet ReceiverWallet { get; set; }
 
         /// <summary>
         /// Amount of Money for Transaction

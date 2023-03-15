@@ -61,8 +61,8 @@ namespace EWalletService.Application.UseCases.EWalletCQRS
                 receiverEWallet.AmountOfMoney += request.PaymentAmount;
                 TransactionHistory transactionHistory = new()
                 {
-                    ReceiverWalletId = receiverEWallet,
-                    SenderWalletId = senderEWallet,
+                    ReceiverWallet = receiverEWallet,
+                    SenderWallet = senderEWallet,
                     TransactionAmount = request.PaymentAmount,
                     TransactionDate = DateTime.UtcNow,
                 };
