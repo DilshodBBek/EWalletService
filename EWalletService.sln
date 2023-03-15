@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EWalletService.Application"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EWalletService.Infrastructure", "EWalletService.Infrastructure\EWalletService.Infrastructure.csproj", "{DDA18158-7B26-4BDD-8708-6F26F6526D77}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{B93CBCE8-21E6-4C94-A307-126FEBEAF80E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{B93CBCE8-21E6-4C94-A307-126FEBEAF80E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EWallet.Test", "EWallet.Test\EWallet.Test.csproj", "{C831B9FD-7808-4562-9F7F-F2BC6B07FB38}"
 EndProject
